@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import serialize from 'serialize-javascript';
-import DocumentMeta from 'react-document-meta';
-const cdn = '//cdnjs.cloudflare.com/ajax/libs/';
+import React, {Component, PropTypes} from 'react'
+import serialize from 'serialize-javascript'
+import DocumentMeta from 'react-document-meta'
+const cdn = '//cdnjs.cloudflare.com/ajax/libs/'
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -12,6 +12,7 @@ const cdn = '//cdnjs.cloudflare.com/ajax/libs/';
  * HTML doctype declaration, which is added to the rendered output
  * by the server.js file.
  */
+
 export default class Html extends Component {
   static propTypes = {
     assets: PropTypes.object,
@@ -19,32 +20,33 @@ export default class Html extends Component {
     store: PropTypes.object
   }
 
-  render() {
-    const {assets, component, store} = this.props;
+  render () {
+    const {assets, component, store} = this.props
     return (
-      <html lang="en-us">
+      <html lang='en-us'>
         <head>
-          <meta charSet="utf-8"/>
+          <meta charSet='utf-8'/>
+          {/* Insert meta tags for metadata declared in child page components */}
           {DocumentMeta.rewind({asReact: true})}
 
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel='shortcut icon' href='/favicon.ico' />
           <link href={cdn + 'twitter-bootstrap/3.3.5/css/bootstrap.css'}
-                media="screen, projection" rel="stylesheet" type="text/css" />
+                media='screen, projection' rel='stylesheet' type='text/css' />
           <link href={cdn + 'font-awesome/4.3.0/css/font-awesome.min.css'}
-                media="screen, projection" rel="stylesheet" type="text/css" />
+                media='screen, projection' rel='stylesheet' type='text/css' />
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {Object.keys(assets.styles).map((style, i) =>
-            <link href={assets.styles[style]} key={i} media="screen, projection"
-                  rel="stylesheet" type="text/css"/>
+            <link href={assets.styles[style]} key={i} media='screen, projection'
+                  rel='stylesheet' type='text/css'/>
           )}
         </head>
         <body>
-          <div id="content" dangerouslySetInnerHTML={{__html: React.renderToString(component)}}/>
-          <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} />
+          <div id='content' dangerouslySetInnerHTML={{__html: React.renderToString(component)}}/>
+          {/* <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} /> */}
           <script src={assets.javascript.main}/>
         </body>
       </html>
-    );
+    )
   }
 }
