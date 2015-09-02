@@ -3,45 +3,45 @@ import constant from 'lodash.constant'
 
 class RouteGovernor extends Governor {
 
-  state (prop) {
-    return {
+  state () { return {
 
-      view: {
-        current: prop(),
-        previous: prop(),
-        isDeepLink: prop(false)
-      },
+    view: (prop) => { return {
+      current: prop('current'),
+      previous: prop('previous'),
+      isDeepLink: prop(false)
+    }},
 
-      navigate: prop()
+    navigate: (prop) => { return {
+      path: prop('navigate')
+    }}
 
-    }
-  }
+  }}
 
   laws (when, a) {
 
     when(a.route.changes)
       .updateProps('previous', 'current', 'navigate')
 
-    when(a.federation.isCurrently('*'))
-      .updateProp('isDeepLink')
+    // when(a.federation.isCurrently('*'))
+    //   .updateProp('isDeepLink')
 
   }
 
-  updatePrevious (e) {
+  updatePrevious (currVal, e) {
     return e.data.current
   }
 
-  updateCurrent (e) {
+  updateCurrent (currVal, e) {
     return e.data.next
   }
 
-  updateIsDeepLink (e) {
+  updateIsDeepLink (currVal, e) {
     this.updateIsDeepLink = constant(false)
     return e.data.isInitialState
   }
 
-  updateNavigate (e) {
-    return e.data.current.path
+  updateNavigate (currVal, e) {
+    return e.data.next.path
   }
 
 }

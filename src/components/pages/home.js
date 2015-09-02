@@ -12,8 +12,8 @@ export default class HomePage extends Component {
             <a href="/tries/3">Tries</a>
           </span>
         </nav>
+        <h1>WAT Namegame</h1>
       </header>
-      <h1>WAT Namegame</h1>
     )
   }
 }

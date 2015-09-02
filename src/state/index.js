@@ -1,6 +1,6 @@
-import Autocrat from'autocrat')
+import Autocrat from 'autocrat'
 
-module.exports = Autocrat.define({
+export default Autocrat.define({
 
   constitution: [
     require('autocrat-state-machine')
@@ -12,15 +12,16 @@ module.exports = Autocrat.define({
 
   governors: [
     require('./governors/route'),
-    require('./governors/page'),
-    require('./governors/persistence')
+    require('./governors/page')
+    // require('./governors/page'),
+    // require('./governors/persistence')
   ],
 
   delegates: [
     require('./delegates/navigate'),
     require('./delegates/document'),
-  ],
+  ]
 
-  stateMachine: require('./state-machine')
+  // stateMachine: require('./state-machine')
 
 })

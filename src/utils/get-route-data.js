@@ -1,41 +1,54 @@
 import getPage from './get-page'
 import urlMatch from './url-match'
+import memoize from 'lodash.memoize'
 
 const initialTriggeringEvent = { type: 'initialize' }
 
 function getInitialRouteData () {
-  const path = window.location.pathname
-  const params
+  const nextPath = window.location.pathname
+  const nextPage = getPage(nextPath)
   return {
     current: null,
     next: {
-      name: getPage(path).name,
-      path: path,
-      params: urlMatch(path).params,
+      name: nextPage.name,
+      path: nextPath,
+      params: urlMatch(nextPath, nextPage.route).params,
       triggeringEvent: initialTriggeringEvent
     }
   }
 }
 
-function getMemoizeKey (currentPath, nextPath, event) {
+function getMemoizeKey (currentPath = '', nextPath = '', event = 'initialize') {
   return `${currentPath}${nextPath}${event.toString()}`
 }
 
-function getRouteData (currentPath, nextPath, event) {
-  if(!currentPath) return getInitialRouteData()
+function getRouteData (pathData, triggeringEvent) {
+  if (!pathData) return getInitialRouteData()
+
+  let currentPath, nextPath
+  if (typeof pathData === 'string') {
+    nextPath = pathData
+    currentPath = window.location.pathname
+  } else {
+    currentPath = pathData.currentPath
+    nextPath = pathData.nextPath
+  }
+
+  const currentPage = getPage(currentPath)
+  const nextPage = getPage(nextPath)
 
   return {
     current: {
-      name: getPage(currentPath).name,
+      name: currentPage.name,
       path: currentPath,
-      params: urlMatch(currentPath).params,
-      triggeringEvent: event
+      params: urlMatch(currentPath, currentPage.route).params,
+      triggeringEvent
     },
     next: {
-      name: getPage(nextPath).name,
+      name: nextPage.name,
       path: nextPath,
-      params: urlMatch(nextPath).params,
-      triggeringEvent: event
+      params: urlMatch(nextPath, nextPage.route).params,
+      triggeringEvent
     }
   }
 }

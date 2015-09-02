@@ -1,34 +1,27 @@
-import {PropTypes} from 'react'
-
-const {
-  string, array, bool, func, number, object, node,
-  element, oneOf, oneOfType, arrayOf, objectOf, shape
-} = PropTypes
-
-export const default {
+export default {
 
   App: {
-    page: object,
-    route: object,
+    page: 'page',
+    route: 'route'
   },
 
   People: {
-    people: [ 'currentPeople' , array ],
-    selectedPerson: object,
-    resultOverlayImage: string,
-    mattLastName: [ 'input.mattLastName', string ],
-    currentPerson: object
+    people: 'currentPeople',
+    selectedPerson: 'selectedPerson',
+    resultOverlayImage: 'resultOverlayImage',
+    mattLastName: 'input.mattLastName',
+    currentPerson: 'currentPerson'
   },
 
   Scoreboard: {
-    timer: array, // e.g. [h, m, s, ms]
-    bestTime: string,
-    worstTime: string,
-    avgTime: string,
-    seenPeopleCount: number,
-    crushedItCount: number,
-    needsReviewCount: number,
-    triesScores: arrayOf(number)
+    timer: 'time', // e.g. [h, m, s, ms]
+    bestTime: 'bestTime',
+    worstTime: 'worstTime',
+    avgTime: 'avtTime',
+    seenPeopleCount: 'seenPeopleCount',
+    crushedItCount: 'crushedItCount',
+    needsReviewCount: 'needsReviewCount',
+    triesScores: 'triesScores'
   }
 
 }

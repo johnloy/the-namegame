@@ -1,4 +1,3 @@
-import memoize from 'lodash.memoize'
 import HomePage from '../components/pages/home'
 import PlayPage from '../components/pages/play'
 import TryPage from '../components/pages/try'

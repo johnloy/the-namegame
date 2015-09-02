@@ -1,5 +1,6 @@
-export default function navigate (url, autocrat) {
-  if (url !== window.location.pathname) {
-    window.history.pushState({}, '', url)
+export default function navigate (autocrat, state) {
+  const { route: { path } } =  state
+  if (path !== window.location.pathname) {
+    window.history.pushState({}, '', path)
   }
 }

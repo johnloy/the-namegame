@@ -26,7 +26,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['react-hot', 'babel?stage=0&optional=runtime&plugins=typecheck'] },
+      { test: /\.js$/, exclude: /node_modules|autocrat-/, loaders: ['react-hot-loader', 'babel?stage=0&optional=runtime&plugins=typecheck'] },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' },
       { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
@@ -38,7 +38,12 @@ module.exports = {
       'src',
       'node_modules'
     ],
-    extensions: ['', '.json', '.js']
+    fallback: path.resolve(__dirname, '..', 'node_modules'),
+    extensions: ['', '.json', '.js'],
+    alias: {
+      'lodash.foreach': path.resolve(__dirname, '..', 'node_modules', 'lodash.foreach'),
+      'lodash.forEach': path.resolve(__dirname, '..', 'node_modules', 'lodash.foreach')
+    }
   },
   plugins: [
     // hot reload

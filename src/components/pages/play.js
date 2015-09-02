@@ -12,8 +12,8 @@ export default class PlayPage extends Component {
             <a href="/tries/3">Tries</a>
           </span>
         </nav>
+        <h1>Play</h1>
       </header>
-      <h1>Play</h1>
     )
   }
 

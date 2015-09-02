@@ -12,8 +12,8 @@ export default class TryPage extends Component {
             <a href="/tries/3">Tries</a>
           </span>
         </nav>
+        <h1>Try #</h1>
       </header>
-      <h1>Try #</h1>
     )
   }
 

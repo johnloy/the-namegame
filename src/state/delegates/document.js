@@ -1,7 +1,9 @@
-export default function document (state) {
+import reduce from 'lodash.reduce'
+
+export default function document (autocrat, state) {
   if (typeof document !== 'undefined') {
 
-    const doc = state.reduce((result, governor) => {
+    const doc = reduce(state, (result, governor) => {
       return Object.assign(result, governor)
     }, {})
 

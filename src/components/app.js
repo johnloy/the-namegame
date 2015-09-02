@@ -1,44 +1,47 @@
 import React, {Component, PropTypes} from 'react'
-import Router from './router'
-import Page from './page'
-import InternalNav from './internal-nav'
 import localLinks from 'local-links'
 import { pages } from '../constants/pages'
-import getRouteData from '../utils/get-route-data'
 import State from '../state'
 import bindToState from '../react-autocrat/bind-to-state'
 import componentBindings from '../state/component-bindings'
+import getPage from '../utils/get-page'
 
-@bindToState(new State(), componentBindings)
+const state = new State()
+global.$tate = state
+
+@bindToState(state, componentBindings)
 export default class App extends Component {
 
   componentDidMount () {
     const {advise, advisors: the} = this.props
-    advise(the.route)
-      .to('change', getRouteData())()
+    advise(the.route).to('initialize')()
   }
 
   onPotentialNav (e) {
-    const {advise, advisors: the} = this.props
     const nextPath = localLinks.getLocalPathname(e)
 
     if (nextPath) {
+      const {advise, advisors: the} = this.props
       e.preventDefault()
-      advise(the.route)
-        .to('change',
-            getRouteData(window.location.pathname, nextPath, e))()
+      advise(the.route).to('change', nextPath, e)()
     }
   }
 
   render () {
-    const { page: pageProps } = this.props
-    const Page = pages[page.name].component
+    const { page } = this.props
+    const pageConf = page && getPage(page.get('name'))
+    const Page = pageConf && pageConf.component
 
-    return (
-      <div className="app" onClick={this.onPotentialNav}>
-        { React.createElement(Page, pageProps) }
-      </div>
-    )
+    if(Page) {
+      return (
+        <section class="app" onClick={ this.onPotentialNav.bind(this) }>
+          { React.createElement(Page, page.toObject()) }
+        </section>
+      )
+    } else {
+      return <div />
+    }
+
   }
 
 }
