@@ -20,7 +20,7 @@ export const pages = [
   { name: 'Try',
     route: [/\/tries\/(\d{1,3})$/, 'tryId'],
     component: TryPage,
-    htmlTitle: (props) => `Try #${props.tryId} — ${titleBase}` },
+    htmlTitle: (params) => `Try #${params.tryId} — ${titleBase}` },
 
   { name: '404',
     component: NotFoundPage,

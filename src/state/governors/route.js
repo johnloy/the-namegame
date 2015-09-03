@@ -1,5 +1,6 @@
 import Governor from 'autocrat-governor'
 import constant from 'lodash.constant'
+import isUndefined from 'lodash.isundefined'
 
 class RouteGovernor extends Governor {
 
@@ -8,7 +9,7 @@ class RouteGovernor extends Governor {
     view: (prop) => { return {
       current: prop('current'),
       previous: prop('previous'),
-      isDeepLink: prop(false)
+      isDeepLink: prop('isDeepLink')
     }},
 
     navigate: (prop) => { return {
@@ -18,12 +19,16 @@ class RouteGovernor extends Governor {
   }}
 
   laws (when, a) {
+    const the = a
 
     when(a.route.changes)
       .updateProps('previous', 'current', 'navigate')
 
-    // when(a.federation.isCurrently('*'))
-    //   .updateProp('isDeepLink')
+    when(a.route.changes)
+      .advise(the.page).to('updateWithRoute')
+
+    when(a.route.changes)
+      .updateProp('isDeepLink')
 
   }
 
@@ -36,8 +41,8 @@ class RouteGovernor extends Governor {
   }
 
   updateIsDeepLink (currVal, e) {
-    this.updateIsDeepLink = constant(false)
-    return e.data.isInitialState
+    const ret = isUndefined(currVal) ? true : false
+    return ret
   }
 
   updateNavigate (currVal, e) {

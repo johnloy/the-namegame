@@ -7,14 +7,16 @@ export default Autocrat.define({
   ],
 
   advisors: [
-    require('./advisors/route')
+    require('./advisors/app'),
+    require('./advisors/route'),
+    require('./advisors/people'),
+    require('./advisors/page')
   ],
 
   governors: [
     require('./governors/route'),
-    require('./governors/page')
-    // require('./governors/page'),
-    // require('./governors/persistence')
+    require('./governors/page'),
+    require('./governors/people')
   ],
 
   delegates: [

@@ -14,6 +14,7 @@ export default class App extends Component {
 
   componentDidMount () {
     const {advise, advisors: the} = this.props
+    advise(the.app).to('mount')()
     advise(the.route).to('initialize')()
   }
 

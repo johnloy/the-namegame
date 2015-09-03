@@ -1,5 +1,6 @@
 import Governor from 'autocrat-governor'
 import constant from 'lodash.constant'
+import isFunction from 'lodash.isfunction'
 
 export default class PageGovernor extends Governor {
 
@@ -16,19 +17,22 @@ export default class PageGovernor extends Governor {
 
   }}
 
-  laws (when, a) {
+  laws (when, the) {
 
-    when(a.route.changes)
-      .updateProps()
+    when(the.page.changes).updateProps()
 
+    // when(the.page.is('Play'))
+    //   .advise(the.people).to('selectNewSet')
   }
 
   updateName (currVal, e) {
-    return e.data.next.name
+    return e.data.name
   }
 
   updateTitle (currVal, e) {
-    return e.data.next.name
+    const titleDef = e.data.htmlTitle
+    if(isFunction(titleDef)) return titleDef(e.data.params)
+    return e.data.htmlTitle
   }
 
 }

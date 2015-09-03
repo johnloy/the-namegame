@@ -16,7 +16,7 @@ import PrettyError from 'pretty-error'
 const pretty = new PrettyError()
 const app = new Express()
 const proxy = httpProxy.createProxyServer({
-  target: 'http://api.namegame.willowtreemobile.com'
+  target: 'http://api.namegame.willowtreemobile.com/'
 })
 
 app.use(compression())

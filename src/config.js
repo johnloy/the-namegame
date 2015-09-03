@@ -3,6 +3,7 @@ module.exports = {
     isProduction: false,
     port: 3000,
     apiPort: 3030,
+    apiRootUrl: 'http://api.namegame.willowtreemobile.com',
     app: {
       name: 'React Redux Example Development'
     }
@@ -11,6 +12,7 @@ module.exports = {
     isProduction: true,
     port: process.env.PORT,
     apiPort: 3030,
+    apiRootUrl: 'http://api.namegame.willowtreemobile.com',
     app: {
       name: 'React Redux Example Production'
     }

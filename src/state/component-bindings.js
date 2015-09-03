@@ -1,3 +1,4 @@
+// All addresses are relative to (@root)view.
 export default {
 
   App: {
