@@ -1,5 +1,5 @@
 import Advisor from 'autocrat-advisor'
-import getPage from '../../utils/get-page'
+import getPage from '../../../lib/get-page'
 import omit from 'lodash.omit'
 
 export default class PageAdvisor extends Advisor {

@@ -1,14 +1,12 @@
 import Express from 'express'
 import React from 'react'
-import Location from 'react-router/lib/Location'
-import config from './config'
+import config from '../config'
 import favicon from 'serve-favicon'
 import compression from 'compression'
 import httpProxy from 'http-proxy'
 import path from 'path'
-// import createStore from './redux/create'
-// import api from './api/api'
-import ApiClient from './api-client'
+import ApiClient from '../lib/api-client'
+// import Location from 'react-router/lib/Location'
 // import universalRouter from './universalRouter'
 import Html from './components/html'
 import PrettyError from 'pretty-error'
@@ -35,9 +33,9 @@ app.use((req, res) => {
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh()
   }
-  const client = new ApiClient(req)
+  // const client = new ApiClient(req)
   // const store = createStore(client)
-  const location = new Location(req.path, req.query)
+  // const location = new Location(req.path, req.query)
   if (__DISABLE_SSR__) {
     res.send('<!doctype html>\n' +
       React.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>}/>))

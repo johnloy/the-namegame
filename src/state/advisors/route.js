@@ -1,5 +1,5 @@
 import Advisor from 'autocrat-advisor'
-import getRouteData from '../../utils/get-route-data'
+import getRouteData from '../../../lib/get-route-data'
 
 export default class RouteAdvisor extends Advisor {
 

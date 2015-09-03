@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Autocrat from 'autocrat'
-import getComponentName from '../utils/get-component-name'
+import getComponentName from '../../../lib/get-component-name'
 import isPlainObject from 'lodash.isplainobject'
 import Immutable from 'immutable'
 import invoke from 'lodash.invoke'

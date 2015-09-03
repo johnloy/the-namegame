@@ -1,5 +1,5 @@
 import Advisor from 'autocrat-advisor'
-import ApiClient from '../../api-client'
+import ApiClient from '../../../lib/api-client'
 import Bacon from 'baconjs'
 
 const requests = {}

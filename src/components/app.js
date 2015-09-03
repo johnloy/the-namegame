@@ -2,9 +2,9 @@ import React, {Component, PropTypes} from 'react'
 import localLinks from 'local-links'
 import { pages } from '../constants/pages'
 import State from '../state'
-import bindToState from '../react-autocrat/bind-to-state'
+import bindToState from './decorators/bind-to-state'
 import componentBindings from '../state/component-bindings'
-import getPage from '../utils/get-page'
+import getPage from '../../lib/get-page'
 
 const state = new State()
 global.$tate = state
