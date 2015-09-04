@@ -17,7 +17,7 @@ module.exports = {
       parser: WebpackIsomorphicToolsPlugin.url_loader_parser
     },
     style_modules: {
-      extension: 'scss',
+      extension: 'css',
       development: true,
       filter: function (m, regex, options) {
         if (options.environment === 'production') {
@@ -41,11 +41,12 @@ module.exports = {
         return name
       },
       parser: function (m, options) {
-        if (m.source) {
-          var regex = options.environment === 'production' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/
-          var match = m.source.match(regex)
-          return match ? JSON.parse(match[1]) : {}
-        }
+        // if (m.source) {
+        //   var regex = options.environment === 'production' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\s|\t)+);/
+        //   var match = m.source.match(regex)
+        //   return (match ? JSON.parse(match[1]) : {})
+        // }
+        return {}
       }
     }
   }

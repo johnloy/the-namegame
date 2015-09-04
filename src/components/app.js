@@ -5,6 +5,7 @@ import State from '../state'
 import bindToState from './decorators/bind-to-state'
 import componentBindings from '../state/component-bindings'
 import getPage from '../../lib/get-page'
+import Page from './page'
 
 const state = new State()
 global.$tate = state
@@ -31,12 +32,14 @@ export default class App extends Component {
   render () {
     const { page } = this.props
     const pageConf = page && getPage(page.get('name'))
-    const Page = pageConf && pageConf.component
+    // const Page = pageConf && pageConf.component
+    require('./app.css')
+    // const styles = require('./app.css')
 
-    if(Page) {
+    if(page) {
       return (
         <section class="app" onClick={ this.onPotentialNav.bind(this) }>
-          { React.createElement(Page, page.toObject()) }
+          <Page {...page.toObject()} />
         </section>
       )
     } else {

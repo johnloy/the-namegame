@@ -1,9 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
+import { pages } from '../constants/pages'
+import getPage from '../../lib/get-page'
 import reactMixin from 'react-mixin'
 import reactKeybinding from 'react-keybinding'
 
 @reactMixin.decorate(reactKeybinding)
-export default class PlayPage extends Component {
+export default class App extends Component {
 
   static contextTypes = {
     advisors: PropTypes.object.isRequired,
@@ -13,14 +15,23 @@ export default class PlayPage extends Component {
   constructor (props, context) {
     super(props, context)
 
-    const { advise, advisors: the } = this.context
+    const {advise, advisors: the} = this.context
 
     this.keybindings = {
+      'enter': advise(the.app).to('play'),
       'esc': advise(the.app).to('quitPlaying')
     }
   }
 
   render () {
+    // const { page } = this.props
+    // const pageConf = page && getPage(page.get('name'))
+    // const Page = pageConf && pageConf.component
+    // require('./app.css')
+    // const styles = require('./app.css')
+
+    const { name: pageName } = this.props
+
     return (
       <div className="container" key="container">
         <header className="codrops-header">
@@ -43,7 +54,7 @@ export default class PlayPage extends Component {
           </div>
         </header>
 
-        <nav id="bt-menu" className="bt-menu bt-menu-open">
+        <nav id="bt-menu" className={ pageName === 'Play' ? 'bt-menu bt-menu-open' : 'bt-menu bt-menu-closed' }>
           <a href="#" className="bt-menu-trigger"><span>Menu</span></a>
           <ul className="bt-menu-side">
             <li><a href="#">Search</a></li>
@@ -64,6 +75,8 @@ export default class PlayPage extends Component {
         </nav>
       </div>
     )
+
+
   }
 
 }

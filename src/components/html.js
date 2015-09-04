@@ -21,7 +21,9 @@ export default class Html extends Component {
   }
 
   render () {
-    const {assets, component, store} = this.props
+    const { assets, component, store } = this.props
+    debugger
+
     return (
       <html lang='en-us'>
         <head>
@@ -41,7 +43,7 @@ export default class Html extends Component {
                   rel='stylesheet' type='text/css'/>
           )}
         </head>
-        <body>
+        <body className="demo6">
           <div id='content' dangerouslySetInnerHTML={{__html: React.renderToString(component)}}/>
           {/* <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} /> */}
           <script src={assets.javascript.main}/>

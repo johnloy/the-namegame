@@ -1,6 +1,7 @@
 node_modules/
 dist/
 *.iml
-webpack-stats.json
+webpack-stats.debug.json
+webpack-assets.json
 *.log
 logs/
