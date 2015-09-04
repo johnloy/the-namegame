@@ -5,14 +5,9 @@ export default class CommandGovernor extends Governor {
 
   state () { return {
 
-    // view: (prop) => { return {
-    //   name: prop('name')
-    // }},
-    //
-    // document: (prop) => { return {
-    //   title: prop('title'),
-    //   scrollTop: 0
-    // }}
+    view: (prop) => { return {
+      name: prop('name')
+    }}
 
   }}
 

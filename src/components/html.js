@@ -22,7 +22,6 @@ export default class Html extends Component {
 
   render () {
     const { assets, component, store } = this.props
-    debugger
 
     return (
       <html lang='en-us'>
