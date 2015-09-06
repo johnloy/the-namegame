@@ -1,4 +1,4 @@
-import HomePage from '../components/pages/home'
+import StartPage from '../components/pages/start'
 import PlayPage from '../components/pages/play'
 import TryPage from '../components/pages/try'
 import NotFoundPage from '../components/pages/404'
@@ -7,9 +7,9 @@ export const titleBase = 'The Willow Tree Namegame'
 
 export const pages = [
 
-  { name: 'Home',
+  { name: 'Start',
     route: '/',
-    component: HomePage,
+    component: StartPage,
     htmlTitle: `${titleBase}` },
 
   { name: 'Play',

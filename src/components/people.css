@@ -1,0 +1,73 @@
+.people {
+	bottom: 0px;
+	width: 100%;
+	padding: 10px 0;
+  position: static;
+  justify-content: space-around;
+}
+
+.people-viewport {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.person {
+	width: 20%;
+	background: #333;
+	border: 3px solid #687374;
+	margin: 30px 30px;
+	position: relative;
+	cursor: pointer;
+  opacity: 0.01;
+	/* -webkit-transform: translateY(100%) scale(0); */
+	/* transform: translateY(50%) scale(0); */
+	/* -webkit-transition: -webkit-transform 0.3s; */
+	/* transition: transform 0.3s; */
+}
+
+.person:hover,
+.person:focus {
+	border-color: #fff;
+}
+
+.play-page--active .person {
+	/* transform: translateY(0) scale(1); */
+
+  opacity: 1;
+	transition: opacity 0.8s ease-in;
+}
+
+.play-page--active .person:first-child {
+
+	transition-delay: 0.1s;
+}
+
+.play-page--active .person:nth-child(2) {
+	transition-delay: 0.15s;
+}
+
+.play-page--active .person:nth-child(3) {
+	transition-delay: 0.2s;
+}
+
+.play-page--active .person:nth-child(4) {
+	transition-delay: 0.25s;
+}
+
+.play-page--active .person:nth-child(5) {
+	transition-delay: 0.3s;
+}
+
+.play-page--active .person:nth-child(6) {
+	transition-delay: 0.35s;
+}
+
+.play-page--active .person:nth-child(7) {
+	transition-delay: 0.4s;
+}
+
+.play-page--active .person:nth-child(8) {
+	transition-delay: 0.45s;
+}

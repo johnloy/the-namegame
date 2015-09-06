@@ -10,7 +10,7 @@ var serverOptions = {
   contentBase: 'http://' + host + ':' + port,
   quiet: true,
   noInfo: true,
-  hot: true,
+  hot: false,
   inline: true,
   lazy: false,
   publicPath: config.output.publicPath,

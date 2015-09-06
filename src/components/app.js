@@ -30,16 +30,14 @@ export default class App extends Component {
   }
 
   render () {
-    const { page } = this.props
-    const pageConf = page && getPage(page.get('name'))
-    // const Page = pageConf && pageConf.component
     require('./app.css')
-    // const styles = require('./app.css')
+    const { page } = this.props
 
     if(page) {
+      const pageProps = { ...page.toObject(), isDeepLink: this.props.route.get('isDeepLink') }
       return (
-        <section class="app" onClick={ this.onPotentialNav.bind(this) }>
-          <Page {...page.toObject()} />
+        <section className="app" onClick={ this.onPotentialNav.bind(this) }>
+          <Page { ...pageProps } />
         </section>
       )
     } else {

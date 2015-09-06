@@ -13,8 +13,8 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: {
     'main': [
-      'webpack-dev-server/client?http://' + host + ':' + port,
-      'webpack/hot/only-dev-server',
+      // 'webpack-dev-server/client?http://' + host + ':' + port,
+      // 'webpack/hot/only-dev-server',
       './src/client.js'
     ]
   },

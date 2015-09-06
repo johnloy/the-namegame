@@ -22,13 +22,10 @@ class RouteGovernor extends Governor {
     const the = a
 
     when(a.route.changes)
-      .updateProps('previous', 'current', 'navigate')
+      .updateProps('isDeepLink', 'previous', 'current', 'navigate')
 
     when(a.route.changes)
       .advise(the.page).to('updateWithRoute')
-
-    when(a.route.changes)
-      .updateProp('isDeepLink')
 
   }
 

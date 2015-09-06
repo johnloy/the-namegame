@@ -1,10 +1,13 @@
 {
   "javascript": {
-    "main": "./main-3c524e598b690c3c120b.js"
+    "main": "http://localhost:3001/dist/main-d199f99784f60a2a66b5.js"
   },
   "styles": {},
   "images": {},
   "style_modules": {
-    "./src/components/app.css": {}
+    "./src/components/pages/start.css": {},
+    "./src/components/pages/play.css": {},
+    "./src/components/app.css": {},
+    "./src/components/people.css": {}
   }
 }
