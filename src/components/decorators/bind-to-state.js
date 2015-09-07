@@ -7,13 +7,14 @@ import invoke from 'lodash.invoke'
 import map from 'lodash.map'
 import omit from 'lodash.omit'
 import isEmpty from 'lodash.isempty'
+import isObject from 'lodash.isobject'
 
 function getObserver (component, stateTriggerSpec) {
   let finderFn
   if(stateTriggerSpec.finderFn) finderFn = component::stateTriggerSpec.finderFn
 
   const observer = component.autocrat.observe('view.' + stateTriggerSpec.address, finderFn)
-  const changeHandler = component.updateState.bind(component, stateTriggerSpec.propName)
+  const changeHandler = component.updateState.bind(component, stateTriggerSpec.propName, stateTriggerSpec.address)
   const unsubscribe = observer.onChange(changeHandler)
 
   return { finderFn, unsubscribe, ...observer }
@@ -127,19 +128,32 @@ function wrapComponent (WrappedComponent) {
       const { [displayName]: bindingsMap } = this.context.bindingsMap
       const stateTriggerSpecs = map(bindingsMap, buildStateTriggerSpec)
       let initialProps = {}
-      bindStateTrigger = bindStateTrigger.bind(this, this, initialProps)
-      const observers = map(stateTriggerSpecs, bindStateTrigger)
+      let bindStateTriggerProps = bindStateTrigger.bind(this, this, initialProps)
+      const observers = map(stateTriggerSpecs, bindStateTriggerProps)
       return [initialProps, observers]
     }
 
-    updateState (propName, immVal) {
+    updateState (propName, boundAddress, immVal) {
+      const val = immVal.get('val')
+      const valIsObj = isObject(val)
       const immValAddress = immVal.get('address').split('.').slice(1)
       const newImmProps = this.immProps.setIn(immValAddress, immVal.get('val'))
+
+      let newProps
+      if(boundAddress.split('.').length > 1) {
+        newProps = {
+          [propName]: valIsObj ? immVal.get('val') : val
+        }
+      } else {
+        newProps = newImmProps.toObject()
+      }
+
       this.immProps = newImmProps
+
       this.setState({
         props: {
-          ...newImmProps.toObject(),
-          ...this.autocratProps
+          ...this.state.props,
+          ...newProps
         },
         immProps: newImmProps
       })

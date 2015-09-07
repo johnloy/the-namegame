@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import People from '../people'
 
 function addClass(element, className) {
   if (element.classList) {
@@ -76,19 +77,7 @@ export default class PlayPage extends Component {
           <li><a href="#">Calendar</a></li>
           <li><a href="#">Download</a></li>
         </ul>
-        <div className="people-viewport flex flex-center">
-          <ul key="people" className="people flex flex-wrap">
-            <li className="person"><img src="http://willowtreeapps.com/wp-content/uploads/2014/12/headshot_andrew_harris1.jpg" /></li>
-            <li className="person"><img src="http://willowtreeapps.com/wp-content/uploads/2014/12/headshot_andrew_harris1.jpg" /></li>
-            <li className="person"><img src="http://willowtreeapps.com/wp-content/uploads/2014/12/headshot_andrew_harris1.jpg" /></li>
-            <li className="person"><img src="http://willowtreeapps.com/wp-content/uploads/2014/12/headshot_andrew_harris1.jpg" /></li>
-            <li className="person"><img src="http://willowtreeapps.com/wp-content/uploads/2014/12/headshot_andrew_harris1.jpg" /></li>
-            <li className="person"><img src="http://willowtreeapps.com/wp-content/uploads/2014/12/headshot_andrew_harris1.jpg" /></li>
-          </ul>
-          <div className="question">
-          Who is Matt Dawson?
-          </div>
-        </div>
+        <People />
       </section>
     )
   }

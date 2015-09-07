@@ -9,11 +9,16 @@ export default class PeopleGovernor extends Governor {
 
     view: (prop) => { return {
       fetching: prop('fetching', {}),
-      currentSet: prop('currentSet', [])
+      currentSet: prop('currentSet', []),
+      showLoading: prop('showLoading', false)
     }},
 
     db: (prop) => { return {
       collection: prop('people', [])
+    }},
+
+    ui: (prop) => { return {
+      showLoading: prop('uiShowLoading', false)
     }}
 
   }}
@@ -29,16 +34,22 @@ export default class PeopleGovernor extends Governor {
     when(the.people.haveFetched)
       .updateProp('people')
 
-    when.all(the.page.changesTo('Play'))
+    when(the.page.changesTo('Play'))
       .advise(the.people).to('selectNewSet')
+
+    when(the.page.changesFrom('Play'))
+      .advise(the.people).to('clearSet')
 
     // Deep-linking to /play
     when.all(the.people.haveFetched, the.page.changesTo('Play'))
       .advise(the.people).to('selectNewSet')
       .updateProp('people')
 
-    when(the.people.getsNewSet)
-      .updateProp('currentSet')
+    when.any(the.people.getsNewSet)
+      .updateProps('currentSet', 'showLoading')
+
+    when(the.people.clearsItsSet)
+      .updateProps('currentSet', 'showLoading')
   }
 
   updateFetching (currVal, e) {
@@ -58,7 +69,20 @@ export default class PeopleGovernor extends Governor {
   }
 
   updateCurrentSet (currVal, e) {
+    if(e.type === 'people:clearSet') return []
     return e.data
+  }
+
+  updateShowLoading (currVal, e) {
+    let nextVal
+    if(e && Array.isArray(e.data) && !currVal) {
+      nextVal = true
+    } else {
+      nextVal = false
+    }
+    this.props.uiShowLoading = nextVal
+    if(!e) this.props.showLoading = nextVal
+    return nextVal
   }
 
 }

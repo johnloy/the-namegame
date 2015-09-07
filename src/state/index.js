@@ -23,7 +23,7 @@ export default Autocrat.define({
   delegates: [
     require('./delegates/navigate'),
     require('./delegates/document'),
-    require('./delegates/db')
+    require('./delegates/ui')
   ]
 
   // stateMachine: require('./state-machine')

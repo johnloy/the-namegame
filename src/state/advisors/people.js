@@ -87,6 +87,11 @@ export default class PeopleAdvisor extends Advisor {
 
         getsNewSet: Advisor.Stream
 
+      },
+
+      setClearing: {
+        clearSet: Advisor.Action,
+        clearsItsSet: Advisor.Stream
       }
     }
 

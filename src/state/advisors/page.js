@@ -9,9 +9,11 @@ export default class PageAdvisor extends Advisor {
 
       changing: {
 
-        change: Advisor.Action((name, routeParams) => {
-          const nextPage = omit(getPage(name), 'component')
+        change: Advisor.Action((nextName, routeParams, currName) => {
+          const nextPage = omit(getPage(nextName), 'component')
+          const currPage = currName ? omit(getPage(currName), 'component') : null
           nextPage.params = routeParams
+          nextPage.previous = currPage
           return nextPage
         }),
 
@@ -26,6 +28,19 @@ export default class PageAdvisor extends Advisor {
             e.type = 'page:changeTo'
             return e
           })
+        }),
+
+        changesFrom: Advisor.FactoryStream((maybePageName) => {
+          return this.changes.filter((e) => {
+            if(e.data.previous) {
+              var prevPageName = e.data.previous.name
+              return prevPageName.toLowerCase() === maybePageName.toLowerCase()
+            }
+          })
+          .map((e) => {
+            e.type = 'page:changeFrom'
+            return e
+          })
         })
 
       },
@@ -35,7 +50,8 @@ export default class PageAdvisor extends Advisor {
         updateWithRoute: Advisor.Action((data) => {
           const routeData =  data.triggeringEvents.advisor.data
           if(!routeData.current || routeData.current.name !== routeData.next.name) {
-            this.actions.change(routeData.next.name, routeData.next.params)
+            const currentName = routeData.current && routeData.current.name
+            this.actions.change(routeData.next.name, routeData.next.params, currentName)
             return true
           }
         })

@@ -7,7 +7,8 @@ export default {
   },
 
   People: {
-    people: 'currentPeople',
+    showLoading: 'people.showLoading',
+    people: 'people.currentSet',
     selectedPerson: 'selectedPerson',
     resultOverlayImage: 'resultOverlayImage',
     mattLastName: 'input.mattLastName',
