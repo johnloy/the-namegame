@@ -64,12 +64,16 @@ export default class PlayPage extends Component {
   }
 
   render () {
+    const {advise, advisors: the} = this.context
     require('./play.css')
     require('../people.css')
 
     return (
       <section className="play-page">
-        <a key="quit-btn" href="#" className="quit-btn fixed block"><span>Menu</span></a>
+        <a key="quit-btn"
+           className="quit-btn fixed block"
+           title="Click to quit"
+           onClick={ advise(the.app).to('quitPlaying') }><span>Quit</span></a>
         <ul key="scoreboard" className="scoreboard">
           <li><a href="#">Search</a></li>
           <li><a href="#">Compose</a></li>
