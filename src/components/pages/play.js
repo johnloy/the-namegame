@@ -85,6 +85,9 @@ export default class PlayPage extends Component {
             <li className="person"><img src="http://willowtreeapps.com/wp-content/uploads/2014/12/headshot_andrew_harris1.jpg" /></li>
             <li className="person"><img src="http://willowtreeapps.com/wp-content/uploads/2014/12/headshot_andrew_harris1.jpg" /></li>
           </ul>
+          <div className="question">
+          Who is Matt Dawson?
+          </div>
         </div>
       </section>
     )

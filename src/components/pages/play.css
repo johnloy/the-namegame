@@ -40,7 +40,6 @@
 	text-align: center;
 	/* position: fixed; */
 	left: 50%;
-	z-index: 200;
 	white-space: nowrap;
 	-webkit-touch-callout: none;
 	user-select: none;
@@ -113,6 +112,15 @@
 
 .quit-btn span:after {
 	transform: rotate(-45deg);
+}
+
+.question {
+  font-size: 40px;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: -100px;
+  text-align: center;
 }
 
 

@@ -246,3 +246,7 @@ body {
 .icon-play:before {
   content: "\f04b";
 }
+
+.icon-user-check {
+  width: 40px;
+}

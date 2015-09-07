@@ -15,7 +15,19 @@ export default class PageAdvisor extends Advisor {
           return nextPage
         }),
 
-        changes: Advisor.Stream
+        changes: Advisor.Stream,
+
+        changesTo: Advisor.FactoryStream((maybePageName) => {
+          return this.changes.filter((e) => {
+            var nextPageName = e.data.name
+            return nextPageName.toLowerCase() === maybePageName.toLowerCase()
+          })
+          .map((e) => {
+            e.type = 'page:changeTo'
+            return e
+          })
+        })
+
       },
 
       updating: {
@@ -30,6 +42,7 @@ export default class PageAdvisor extends Advisor {
       }
 
     }
+
   }
 
 }

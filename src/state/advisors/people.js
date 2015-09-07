@@ -1,6 +1,8 @@
 import Advisor from 'autocrat-advisor'
 import ApiClient from '../../../lib/api-client'
 import Bacon from 'baconjs'
+import selectPeople from '../../../lib/select-people'
+import createDb from '../../../lib/create-db'
 
 const requests = {}
 
@@ -63,6 +65,27 @@ export default class PeopleAdvisor extends Advisor {
               })
           )
         })
+
+      },
+
+      newSetSelecting: {
+
+        selectNewSet: Advisor.Action((...args) => {
+          let people
+          if('triggeringEvents' in args[0]) {
+            if(Array.isArray(args[0].triggeringEvents.advisor)) {
+              people = createDb(args[0].triggeringEvents.advisor[0].data.collection)
+            } else if(args[0].triggeringEvents.advisor.type === 'page:changeTo') {
+              people = this.autocrat.get('db.people.collection').value()
+            }
+          } else {
+            people = args
+          }
+
+          if(people) return selectPeople(people)
+        }),
+
+        getsNewSet: Advisor.Stream
 
       }
     }

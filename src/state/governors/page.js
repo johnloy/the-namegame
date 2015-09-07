@@ -21,8 +21,6 @@ export default class PageGovernor extends Governor {
 
     when(the.page.changes).updateProps()
 
-    // when(the.page.is('Play'))
-    //   .advise(the.people).to('selectNewSet')
   }
 
   updateName (currVal, e) {
