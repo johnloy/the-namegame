@@ -136,6 +136,7 @@
     "lodash.isequal": "^3.0.3",
     "lodash.isfunction": "^3.0.3",
     "lodash.isnull": "^3.0.0",
+    "lodash.isnumber": "^3.0.1",
     "lodash.isobject": "^3.0.1",
     "lodash.isplainobject": "^3.2.0",
     "lodash.isregexp": "^3.0.2",

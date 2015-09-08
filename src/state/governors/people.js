@@ -2,6 +2,7 @@ import Governor from 'autocrat-governor'
 import constant from 'lodash.constant'
 import omit from 'lodash.omit'
 import createDb from '../../../lib/create-db'
+import find from 'lodash.find'
 
 export default class PeopleGovernor extends Governor {
 
@@ -11,7 +12,8 @@ export default class PeopleGovernor extends Governor {
       fetching: prop('fetching', {}),
       currentSet: prop('currentSet', []),
       showLoading: prop('showLoading', false),
-      currentlyFocused: prop('currentlyFocused')
+      currentlyFocused: prop('currentlyFocused'),
+      currentSubject: prop('currentSubject')
     }},
 
     db: (prop) => { return {
@@ -48,7 +50,7 @@ export default class PeopleGovernor extends Governor {
 
     when.any(the.people.getsNewSet)
       .advise(the.timer).to('start')
-      .updateProps('currentSet', 'showLoading')
+      .updateProps('currentSet', 'showLoading', 'currentSubject')
 
     when(the.people.clearsItsSet)
       .updateProps('currentSet', 'showLoading', 'currentlyFocused')
@@ -95,6 +97,11 @@ export default class PeopleGovernor extends Governor {
   updateCurrentlyFocused (currVal, e) {
     if(e.type === 'app:focusPerson') return e.data
     return null
+  }
+
+  updateCurrentSubject (currVal, e) {
+    if(e.type === 'people:clearSet') return null
+    return find(e.data, { isSubject: true })
   }
 
 }

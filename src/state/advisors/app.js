@@ -1,6 +1,7 @@
 import Advisor from 'autocrat-advisor'
 import contains from 'lodash.contains'
 import isString from 'lodash.isstring'
+import isNumber from 'lodash.isnumber'
 
 export default class AppAdvisor extends Advisor {
 
@@ -44,8 +45,14 @@ export default class AppAdvisor extends Advisor {
 
       personChoosing: {
         choosePerson: Advisor.Action(() => {
+          const id = this.autocrat.get('view.people.currentlyFocused').value()
+          return id
         }),
-        choosesPerson: Advisor.Stream
+        choosesPerson: Advisor.Stream((baseStream) => {
+          return baseStream.filter((e) => {
+            return isNumber(e.data)
+          })
+        })
       }
 
     }

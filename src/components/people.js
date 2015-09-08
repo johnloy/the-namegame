@@ -12,9 +12,12 @@ export default class People extends Component {
     if(people && people.length) {
       return (
         people.map((person) => {
+          const isFocused = Boolean(currentlyFocused && currentlyFocused === person.get('id'))
           const classes = classNames(
             'person',
-            { 'person--selected': currentlyFocused && currentlyFocused === person.get('id') }
+            { 'person--selected': isFocused,
+              'person--not-selected': currentlyFocused && !isFocused
+            }
           )
           return <li className={ classes }><img src={person.get('photo')} /></li>
         })
