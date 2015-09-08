@@ -10,7 +10,8 @@ export default class PeopleGovernor extends Governor {
     view: (prop) => { return {
       fetching: prop('fetching', {}),
       currentSet: prop('currentSet', []),
-      showLoading: prop('showLoading', false)
+      showLoading: prop('showLoading', false),
+      currentlyFocused: prop('currentlyFocused')
     }},
 
     db: (prop) => { return {
@@ -46,10 +47,16 @@ export default class PeopleGovernor extends Governor {
       .updateProp('people')
 
     when.any(the.people.getsNewSet)
+      .advise(the.timer).to('start')
       .updateProps('currentSet', 'showLoading')
 
     when(the.people.clearsItsSet)
-      .updateProps('currentSet', 'showLoading')
+      .updateProps('currentSet', 'showLoading', 'currentlyFocused')
+      .advise(the.timer).to('reset')
+
+    when(the.app.focusesPerson)
+      .updateProps('currentlyFocused')
+
   }
 
   updateFetching (currVal, e) {
@@ -83,6 +90,11 @@ export default class PeopleGovernor extends Governor {
     this.props.uiShowLoading = nextVal
     if(!e) this.props.showLoading = nextVal
     return nextVal
+  }
+
+  updateCurrentlyFocused (currVal, e) {
+    if(e.type === 'app:focusPerson') return e.data
+    return null
   }
 
 }

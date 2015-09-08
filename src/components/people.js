@@ -2,16 +2,21 @@ import React, {Component, PropTypes} from 'react'
 import bindToState from './decorators/bind-to-state'
 import range from 'lodash.range'
 import Spinner from 'react-spinkit'
+import classNames from 'classnames'
 
 @bindToState()
 export default class People extends Component {
 
   people () {
-    const { people } = this.props
+    const { people, currentlyFocused } = this.props
     if(people && people.length) {
       return (
         people.map((person) => {
-          return <li className="person"><img src={person.get('photo')} /></li>
+          const classes = classNames(
+            'person',
+            { 'person--selected': currentlyFocused && currentlyFocused === person.get('id') }
+          )
+          return <li className={ classes }><img src={person.get('photo')} /></li>
         })
       )
     } else {

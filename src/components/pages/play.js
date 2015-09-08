@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import People from '../people'
+import Scoreboard from '../scoreboard'
+import reactMixin from 'react-mixin'
+import reactKeybinding from 'react-keybinding'
 
 function addClass(element, className) {
   if (element.classList) {
@@ -30,11 +33,26 @@ function hasClass(element, className) {
   }
 }
 
+@reactMixin.decorate(reactKeybinding)
 export default class PlayPage extends Component {
 
   static contextTypes = {
     advisors: PropTypes.object.isRequired,
     advise: PropTypes.func.isRequired
+  }
+
+  constructor (props, context) {
+    super(props, context)
+
+    const {advise, advisors: the} = this.context
+
+    this.keybindings = {
+      'j': advise(the.app).to('focusPerson', 'below'),
+      'k': advise(the.app).to('focusPerson', 'above'),
+      'h': advise(the.app).to('focusPerson', 'before'),
+      'l': advise(the.app).to('focusPerson', 'after'),
+      'enter': advise(the.app).to('choosePerson')
+    }
   }
 
   componentWillEnter (done) {
@@ -66,7 +84,6 @@ export default class PlayPage extends Component {
   render () {
     const {advise, advisors: the} = this.context
     require('./play.css')
-    require('../people.css')
 
     return (
       <section className="play-page">
@@ -74,14 +91,8 @@ export default class PlayPage extends Component {
            className="quit-btn fixed block"
            title="Click to quit"
            onClick={ advise(the.app).to('quitPlaying') }><span>Quit</span></a>
-        <ul key="scoreboard" className="scoreboard">
-          <li><a href="#">Search</a></li>
-          <li><a href="#">Compose</a></li>
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Calendar</a></li>
-          <li><a href="#">Download</a></li>
-        </ul>
         <People />
+        <Scoreboard />
       </section>
     )
   }

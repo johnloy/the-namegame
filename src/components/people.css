@@ -28,6 +28,10 @@
 	/* transition: transform 0.3s; */
 }
 
+.person--selected {
+  border-color: red;
+}
+
 .person:hover,
 .person:focus {
 	border-color: #fff;

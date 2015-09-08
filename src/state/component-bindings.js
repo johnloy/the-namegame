@@ -9,14 +9,14 @@ export default {
   People: {
     showLoading: 'people.showLoading',
     people: 'people.currentSet',
-    selectedPerson: 'selectedPerson',
+    currentlyFocused: 'people.currentlyFocused',
     resultOverlayImage: 'resultOverlayImage',
     mattLastName: 'input.mattLastName',
     currentPerson: 'currentPerson'
   },
 
   Scoreboard: {
-    timer: 'time', // e.g. [h, m, s, ms]
+    time: 'scoring.timeInSeconds', // e.g. [h, m, s, ms]
     bestTime: 'bestTime',
     worstTime: 'worstTime',
     avgTime: 'avtTime',
