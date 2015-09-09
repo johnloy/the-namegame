@@ -38,6 +38,8 @@ export default class AppAdvisor extends Advisor {
               const currentlyFocusedObj = currentSet.find((p) => p.get('id') === currentlyFocused)
               return currentlyFocusedObj.get('neighbors').toObject()[which]
             }
+          } else if(typeof which === 'number') {
+            return which
           }
           return null
         }),

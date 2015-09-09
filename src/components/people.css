@@ -58,11 +58,6 @@
   border-color: #e18728;
 }
 
-.person:hover,
-.person:focus {
-	border-color: #fff;
-}
-
 .play-page--active .person {
 	/* transform: translateY(0) scale(1); */
 

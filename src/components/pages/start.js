@@ -28,6 +28,12 @@ export default class StartPage extends Component {
     setTimeout((() => done()), 400)
   }
 
+  play () {
+    const {advise, advisors: the} = this.context
+    // Hack alert! For some reason, this doesn't work correctly without a timeout
+    setTimeout(advise(the.app).to('play'), 20)
+  }
+
   render () {
     require('./start.css')
     const logo = require('../../../static/wt-logo.png')
@@ -37,7 +43,7 @@ export default class StartPage extends Component {
         <header className="start-page--header">
           <img src={ logo } />
           <h1>Namegame</h1>
-          <a className="play-btn btn btn-outline">Play <span className="icon icon-play"></span></a>
+          <a className="play-btn btn btn-outline" onClick={ this.play.bind(this) }>Play <span className="icon icon-play"></span></a>
           <span className="alt-play-msg">(or just type Enter)</span>
         </header>
       </section>

@@ -3,9 +3,16 @@ import bindToState from './decorators/bind-to-state'
 import range from 'lodash.range'
 import Spinner from 'react-spinkit'
 import classNames from 'classnames'
+import isBoolean from 'lodash.isboolean'
 
 @bindToState()
 export default class People extends Component {
+
+  static contextTypes = {
+    autocrat: PropTypes.object.isRequired,
+    advisors: PropTypes.object.isRequired,
+    advise: PropTypes.func.isRequired
+  }
 
   photoOverlay (isFocused, isAnswerCorrect, isAnswerTooSlow) {
     if(isFocused && isAnswerCorrect !== null) {
@@ -38,7 +45,11 @@ export default class People extends Component {
   }
 
   people () {
-    const { people, currentlyFocused, isAnswerCorrect, isAnswerTooSlow } = this.props
+    const { autocrat, advise, advisors: the } = this.context
+    const { people, currentlyFocused, isAnswerCorrect } = this.props
+    const answerGiven = isBoolean(isAnswerCorrect)
+    const isAnswerTooSlow = answerGiven ? autocrat.get('view.scoring.timeInSeconds').value() > 7 : null
+
     if(people && people.length) {
       return (
         people.map((person) => {
@@ -54,7 +65,9 @@ export default class People extends Component {
           )
           return (
             <li className={ classes }>
-              <img src={person.get('photo')} />
+              <img src={person.get('photo')}
+                   onMouseEnter={!answerGiven ? advise(the.app).to('focusPerson', person.get('id')) : null }
+                   onClick={ advise(the.app).to('choosePerson') } />
               { this.photoOverlay(isFocused, isAnswerCorrect, isAnswerTooSlow) }
             </li>
           )

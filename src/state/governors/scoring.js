@@ -27,7 +27,10 @@ export default class ScoringGovernor extends Governor {
       .advise(the.app).to('givePostAnswerFeedback')
       .advise(the.timer).to('stop')
 
-    when.any(the.app.givesPostAnswerFeedback, the.people.getsNewSet)
+    when(the.app.givesPostAnswerFeedback)
+      .updateProps('isAnswerTooSlow', 'isAnswerCorrect',)
+
+    when(the.people.getsNewSet)
       .updateProps('isAnswerCorrect', 'isAnswerTooSlow')
 
   }
@@ -47,7 +50,8 @@ export default class ScoringGovernor extends Governor {
   updateIsAnswerTooSlow (currVal, e) {
     if(e.data && 'score' in e.data) {
       const { score } = e.data
-      return score > 1 && score < 3 && e.data ? true : false
+      const val = score > 1 && score < 3 && e.data ? true : false
+      return val
     } else {
       return null
     }

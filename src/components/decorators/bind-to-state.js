@@ -8,6 +8,7 @@ import map from 'lodash.map'
 import omit from 'lodash.omit'
 import isEmpty from 'lodash.isempty'
 import isObject from 'lodash.isobject'
+import assign from 'lodash.assign'
 
 function getObserver (component, stateTriggerSpec) {
   let finderFn
@@ -150,11 +151,10 @@ function wrapComponent (WrappedComponent) {
 
       this.immProps = newImmProps
 
+      newProps = assign({}, this.state.props, newProps)
+
       this.setState({
-        props: {
-          ...this.state.props,
-          ...newProps
-        },
+        props: newProps,
         immProps: newImmProps
       })
     }

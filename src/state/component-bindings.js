@@ -16,14 +16,7 @@ export default {
   },
 
   Scoreboard: {
-    time: 'scoring.timeInSeconds', // e.g. [h, m, s, ms]
-    bestTime: 'bestTime',
-    worstTime: 'worstTime',
-    avgTime: 'avtTime',
-    seenPeopleCount: 'seenPeopleCount',
-    crushedItCount: 'crushedItCount',
-    needsReviewCount: 'needsReviewCount',
-    triesScores: 'triesScores'
+    time: 'scoring.timeInSeconds'
   }
 
 }
