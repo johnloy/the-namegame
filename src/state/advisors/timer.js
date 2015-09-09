@@ -8,7 +8,8 @@ export default class TimerAdvisor extends Advisor {
       starting: {
 
         start: Advisor.Action(() => {
-          if(!this.interval) {
+          if(!this.ticking) {
+            this.ticking = true
             requestAnimationFrame(() => {
               this.interval = setInterval(this.actions.tick, 1000)
             })
@@ -25,6 +26,7 @@ export default class TimerAdvisor extends Advisor {
         stop: Advisor.Action(() => {
           clearInterval(this.interval)
           this.interval = null
+          this.ticking = null
         }),
 
         stops: Advisor.Stream

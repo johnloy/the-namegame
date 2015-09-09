@@ -8,11 +8,9 @@ export default class ScoringGovernor extends Governor {
   state () { return {
 
     view: (prop) => { return {
-      timeInSeconds: prop('timeInSeconds')
-    }},
-
-    db: (prop) => { return {
-      scoreForPerson: prop('scoreForPerson')
+      timeInSeconds: prop('timeInSeconds'),
+      isAnswerCorrect: prop('isAnswerCorrect'),
+      isAnswerTooSlow: prop('isAnswerTooSlow')
     }}
 
   }}
@@ -23,7 +21,14 @@ export default class ScoringGovernor extends Governor {
       .updateProp('timeInSeconds')
 
     when(the.app.choosesPerson)
-      .updateProp('scoreForPerson')
+      .advise(the.app).to('calculateScore')
+
+    when(the.app.calculatesScore)
+      .advise(the.app).to('givePostAnswerFeedback')
+      .advise(the.timer).to('stop')
+
+    when.any(the.app.givesPostAnswerFeedback, the.people.getsNewSet)
+      .updateProps('isAnswerCorrect', 'isAnswerTooSlow')
 
   }
 
@@ -31,13 +36,21 @@ export default class ScoringGovernor extends Governor {
     return e.data
   }
 
-  updateScoreForPerson (currVal, e) {
-    const getState = this.autocrat.get
-    const subject = getState('view.people.currentSubject').value()
-    const chosenId = e.data
-    const time = getState('view.scoring.timeInSeconds').value()
-    // [subject, score]
-    return calculateScore(subject, chosenId, time)
+  updateIsAnswerCorrect (currVal, e) {
+    if(e.data && 'score' in e.data) {
+      return e.data.score > 1 ? true : false
+    } else {
+      return null
+    }
+  }
+
+  updateIsAnswerTooSlow (currVal, e) {
+    if(e.data && 'score' in e.data) {
+      const { score } = e.data
+      return score > 1 && score < 3 && e.data ? true : false
+    } else {
+      return null
+    }
   }
 
 }

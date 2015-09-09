@@ -2,7 +2,7 @@ import Advisor from 'autocrat-advisor'
 import ApiClient from '../../../lib/api-client'
 import Bacon from 'baconjs'
 import selectPeople from '../../../lib/select-people'
-import createDb from '../../../lib/create-db'
+import initializePeople from '../../../lib/initialize-people'
 
 const requests = {}
 
@@ -72,17 +72,23 @@ export default class PeopleAdvisor extends Advisor {
 
         selectNewSet: Advisor.Action((...args) => {
           let people
+          const currentSet = this.autocrat.get('view.people.currentSet').value()
           if('triggeringEvents' in args[0]) {
-            if(Array.isArray(args[0].triggeringEvents.advisor)) {
-              people = createDb(args[0].triggeringEvents.advisor[0].data.collection)
-            } else if(args[0].triggeringEvents.advisor.type === 'page:changeTo') {
+            const triggeringEvents = args[0].triggeringEvents
+            if(Array.isArray(triggeringEvents.advisor)) {
+              people = initializePeople(triggeringEvents.advisor[0].data.collection)
+              return selectPeople(people)
+            } else if(triggeringEvents.advisor.type === 'page:changeTo') {
               people = this.autocrat.get('db.people.collection').value()
+              if(people && currentSet && !currentSet.length) return selectPeople(people)
+            } else if(triggeringEvents.advisor.type === 'app:finishesGivingPostAnswerFeedback') {
+              people = triggeringEvents.advisor.data
+              return selectPeople(people)
             }
           } else {
             people = args
+            if(people && currentSet && !currentSet.length) return selectPeople(people)
           }
-
-          if(people) return selectPeople(people)
         }),
 
         getsNewSet: Advisor.Stream
@@ -92,6 +98,18 @@ export default class PeopleAdvisor extends Advisor {
       setClearing: {
         clearSet: Advisor.Action,
         clearsItsSet: Advisor.Stream
+      },
+
+      loadStarting: {
+        startLoading: Advisor.Action(() => {
+          setTimeout(this.actions.stopLoading , 3000)
+        }),
+        startsLoading: Advisor.Stream
+      },
+
+      loadStopping: {
+        stopLoading: Advisor.Action,
+        stopsLoading: Advisor.Stream
       }
     }
 

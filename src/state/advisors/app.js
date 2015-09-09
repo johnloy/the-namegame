@@ -2,6 +2,7 @@ import Advisor from 'autocrat-advisor'
 import contains from 'lodash.contains'
 import isString from 'lodash.isstring'
 import isNumber from 'lodash.isnumber'
+import calculateScore from '../../../lib/calculate-score'
 
 export default class AppAdvisor extends Advisor {
 
@@ -38,7 +39,7 @@ export default class AppAdvisor extends Advisor {
               return currentlyFocusedObj.get('neighbors').toObject()[which]
             }
           }
-          return which
+          return null
         }),
         focusesPerson: Advisor.Stream
       },
@@ -53,9 +54,45 @@ export default class AppAdvisor extends Advisor {
             return isNumber(e.data)
           })
         })
+      },
+
+      scoreCalculating: {
+        calculateScore: Advisor.Action(({ triggeringEvents }) => {
+          const getState = this.autocrat.get
+          const subjectId = getState('view.people.currentSubject').value().id
+          const people = getState('db.people.collection').immutable()
+          const subject = people.find((p) => p.get('id') === subjectId).toJS()
+          const chosenId = triggeringEvents.advisor.data
+          const time = getState('view.scoring.timeInSeconds').value()
+          const score = calculateScore(subject, chosenId, time)
+          return score
+        }),
+        calculatesScore: Advisor.Stream
+      },
+
+      postAnswerFeedback: {
+        givePostAnswerFeedback: Advisor.Action(({ triggeringEvents: { advisor: { data: [subject, score] } } }) => {
+          return { subject, score }
+        }),
+        givesPostAnswerFeedback: Advisor.Stream((baseStream) => {
+          return baseStream
+        }),
+        finishesGivingPostAnswerFeedback: Advisor.Stream(() => {
+          return (
+            this.streams.givesPostAnswerFeedback.bufferWithTime(2000)
+              .map(([advisorEvent]) => {
+                const people = this.autocrat.get('db.people.collection').value()
+                advisorEvent.data = people
+                advisorEvent.type = 'app:finishesGivingPostAnswerFeedback'
+                return advisorEvent
+              })
+          )
+
+        })
       }
 
     }
+
   }
 
 }

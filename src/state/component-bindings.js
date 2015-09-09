@@ -10,9 +10,9 @@ export default {
     showLoading: 'people.showLoading',
     people: 'people.currentSet',
     currentlyFocused: 'people.currentlyFocused',
-    resultOverlayImage: 'resultOverlayImage',
-    mattLastName: 'input.mattLastName',
-    currentPerson: 'currentPerson'
+    currentSubject: 'people.currentSubject',
+    isAnswerCorrect: 'scoring.isAnswerCorrect',
+    isAnswerTooSlow: 'scoring.isAnswerTooSlow'
   },
 
   Scoreboard: {

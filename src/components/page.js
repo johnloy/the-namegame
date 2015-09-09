@@ -1,37 +1,14 @@
 import React, {Component, PropTypes, addons} from 'react/addons'
 import { pages } from '../constants/pages'
 import getPage from '../../lib/get-page'
-import reactMixin from 'react-mixin'
-import reactKeybinding from 'react-keybinding'
 import TimeoutTransitionGroup from './timeout-transition-group'
-
 const ReactTransitionGroup = addons.TransitionGroup;
 
-class NoPage extends Component {
-  render () {
-    return (
-      <div></div>
-    )
-  }
-}
-
-@reactMixin.decorate(reactKeybinding)
 export default class App extends Component {
 
   static contextTypes = {
     advisors: PropTypes.object.isRequired,
     advise: PropTypes.func.isRequired
-  }
-
-  constructor (props, context) {
-    super(props, context)
-
-    const {advise, advisors: the} = this.context
-
-    this.keybindings = {
-      'enter': advise(the.app).to('play'),
-      'esc': advise(the.app).to('quitPlaying')
-    }
   }
 
   shouldComponentUpdate (nextProps, nextState) {

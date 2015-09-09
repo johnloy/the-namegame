@@ -51,8 +51,10 @@ export default class PlayPage extends Component {
       'k': advise(the.app).to('focusPerson', 'above'),
       'h': advise(the.app).to('focusPerson', 'before'),
       'l': advise(the.app).to('focusPerson', 'after'),
-      'enter': advise(the.app).to('choosePerson')
+      'enter': advise(the.app).to('choosePerson'),
+      'esc': advise(the.app).to('quitPlaying')
     }
+
   }
 
   componentWillEnter (done) {

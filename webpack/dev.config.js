@@ -29,7 +29,7 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules|autocrat-/, loaders: ['react-hot-loader', 'babel?stage=0&optional=runtime&plugins=typecheck'] },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.css$/, loader: 'style!css!cssnext' },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
+      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader' }
     ]
   },
   // cssnext: {

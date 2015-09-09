@@ -132,6 +132,7 @@
     "lodash.intersection": "^3.2.0",
     "lodash.invoke": "^3.2.1",
     "lodash.isarray": "^3.0.2",
+    "lodash.isboolean": "^3.0.1",
     "lodash.isempty": "^3.0.3",
     "lodash.isequal": "^3.0.3",
     "lodash.isfunction": "^3.0.3",

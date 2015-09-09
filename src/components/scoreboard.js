@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import bindToState from './decorators/bind-to-state'
-import classNames from 'classnames'
 import TransitiveNumber from 'react-transitive-number'
 
 @bindToState()
@@ -10,13 +9,15 @@ export default class Scoreboard extends Component {
     require('./scoreboard.css')
 
     return (
-      <ul key="scoreboard" className="scoreboard">
-        <li><a href="#"><TransitiveNumber>{ this.props.time || 0 }</TransitiveNumber>s</a></li>
-        <li><a href="#">Compose</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Calendar</a></li>
-        <li><a href="#">Download</a></li>
-      </ul>
+      <aside key="scoreboard" className="scoreboard">
+        <div className="timer">
+          <div className="timer_label">Time:</div>
+          <TransitiveNumber>{ this.props.time || 0 }</TransitiveNumber>s
+        </div>
+        <p className="timer_explanation">
+          <i className="icon icon-info" /> If you guess correctly, but after a time greater than 7 seconds, expect to be reviewed later.
+        </p>
+      </aside>
     )
   }
 }

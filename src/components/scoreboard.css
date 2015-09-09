@@ -1,11 +1,11 @@
 
-ul.scoreboard {
+.scoreboard {
 	position: fixed;
-	top: 20px;
+	top: 0;
 	left: 0;
-	margin: 0 0 0 20px;
-	padding: 0;
-	width: auto;
+	margin: 0;
+	padding: 40px 20px 0 20px;
+	width: 200px;
 	list-style: none;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
@@ -13,14 +13,12 @@ ul.scoreboard {
   transform: translateX(0);
 }
 
-ul.scoreboard li,
-ul.scoreboard li a {
-	display: block;
-	width: 100%;
-	text-align: left;
+.timer_explanation {
+  font-weight: 300;
+  color: #97D3E0;
 }
 
-ul.scoreboard li {
+.scoreboard li {
 	opacity: 0;
 	visibility: hidden;
 	-webkit-transition: -webkit-transform 0.3s, opacity 0.2s, visibility 0s 0.3s;
@@ -86,3 +84,19 @@ ul.scoreboard li {
 	color: #e67e22;
 }
 
+.timer {
+  font-size: 60px;
+  display: block;
+  background-color: #256977;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.timer_label {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #ADCDD4;
+  margin-bottom: -.25em;
+  margin-top: .5em;
+  border-bottom: 1px solid #438694;
+}
