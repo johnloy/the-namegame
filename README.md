@@ -24,5 +24,5 @@ Unfortunately...
 * There is a ton of code cleanup I would do under ideal circumstances. Alas, this is timeboxed, so here it is, warts and all.
 
 * There aren't jsdoc comments or tests, though I value these things highly. I've used qunit, jasmine, and mocha in the past (and Rspec and Cucumber in my Ruby days, and Midje in my recent Clojure excursions), so I have plenty of experience writing tests and would normally do so. I intentionally chose to omit them in this case to leave more time for feature development.
-
+ 
 * Cross-browser compatibility and responsive and mobile concerns necessarily played second fiddle to features and infrastructure/tooling. I wanted to cross the finish line, and these aspects can be very time-intensive, as I'm sure you're aware!
