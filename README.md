@@ -1,6 +1,6 @@
 # WillowTree Apps Namegame
 
-[Imgur](http://i.imgur.com/ldglX33.png)
+![Screenshot](http://i.imgur.com/ldglX33.png)
 
 
 Some Highlights
