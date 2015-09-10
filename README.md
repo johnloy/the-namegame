@@ -14,6 +14,8 @@ Some Highlights
 
 * [An algorithm](https://github.com/johnloy/wat-namegame/blob/master/lib/select-people.js) to randomly select photos for each round giving preference to ones in greater need of review, i.e. un/lesser-seen ones and ones which took > 7 seconds to correctly guess. In theory, after all photos have been seen, the order of priority is from lowest score to highest. As there are 80+ employees, I haven't actually gotten all the way through :)
 
+* Also in the algorithm is an assurance that, if the current name belongs to a female, at least two females are in the set of 6 photos. I found that without this, it was likely only one photo of a female would be displayed, making it too easy to guess correctly simply by knowing that the current subject's name is female. 
+
 * Vim keybindings (`h`, `j`, `k`, `l`) to move among the photo grid. Hit `Enter` to choose the currently focused photo.
 
 Unfortunately...
