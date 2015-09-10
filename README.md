@@ -15,3 +15,14 @@ Some Highlights
 * [An algorithm](https://github.com/johnloy/wat-namegame/blob/master/lib/select-people.js) to randomly select photos for each round giving preference to ones in greater need of review, i.e. un/lesser-seen ones and ones which took > 7 seconds to correctly guess.
 
 * Vim keybindings (`h`, `j`, `k`, `l`) to move among the photo grid. Hit `Enter` to choose the currently focused photo.
+
+Unfortunately...
+----------------
+
+* As with any piece of software, there are bugs. Kudos if you find them :)
+
+* There is a ton of code cleanup I would do under ideal circumstances. Alas, this is timeboxed, so here it is, warts and all.
+
+* There aren't jsdoc comments or tests, though I value these things highly. I've used qunit, jasmine, and mocha in the past (and Rspec and Cucumber in my Ruby days, and Midje in my recent Clojure excursions), so I have plenty of experience writing tests and would normally do so. I intentionally chose to omit them in this case to leave more time for feature development.
+
+* Cross-browser compatibility and responsive and mobile concerns necessarily played second fiddle to features and infrastructure/tooling. I wanted to cross the finish line, and these aspects can be very time-intensive, as I'm sure you're aware!
