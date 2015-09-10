@@ -48,7 +48,7 @@ export default class People extends Component {
     const { autocrat, advise, advisors: the } = this.context
     const { people, currentlyFocused, isAnswerCorrect } = this.props
     const answerGiven = isBoolean(isAnswerCorrect)
-    const isAnswerTooSlow = answerGiven ? autocrat.get('view.scoring.timeInSeconds').value() > 7 : null
+    const isAnswerTooSlow = isAnswerCorrect ? autocrat.get('view.scoring.timeInSeconds').value() > 7 : null
 
     if(people && people.length) {
       return (
