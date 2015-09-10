@@ -12,7 +12,7 @@ Some Highlights
 
 * A [minimal home-baked routing solution](https://github.com/johnloy/wat-namegame/blob/master/src/components/app.js#L16-L30) (there are only two routes).
 
-* [An algorithm](https://github.com/johnloy/wat-namegame/blob/master/lib/select-people.js) to randomly select photos for each round giving preference to ones in greater need of review, i.e. un/lesser-seen ones and ones which took > 7 seconds to correctly guess.
+* [An algorithm](https://github.com/johnloy/wat-namegame/blob/master/lib/select-people.js) to randomly select photos for each round giving preference to ones in greater need of review, i.e. un/lesser-seen ones and ones which took > 7 seconds to correctly guess. In theory, after all photos have been seen, the order of priority is from lowest score to highest. As there are 80+ employees, I haven't actually gotten all the way through :)
 
 * Vim keybindings (`h`, `j`, `k`, `l`) to move among the photo grid. Hit `Enter` to choose the currently focused photo.
 
@@ -22,6 +22,8 @@ Unfortunately...
 * As with any piece of software, there are bugs. Kudos if you find them :)
 
 * There is a ton of code cleanup I would do under ideal circumstances. Alas, this is timeboxed, so here it is, warts and all.
+
+* There are many feature ideas I ended up scuttling for the sake of delivering. For example, the left pane was going to provide much more detail related to scoring and rounds. There was also going to be a historical review sparkline linking to past rounds at routes like `/tries/3`. 
 
 * There aren't jsdoc comments or tests, though I value these things highly. I've used qunit, jasmine, and mocha in the past (and Rspec and Cucumber in my Ruby days, and Midje in my recent Clojure excursions), so I have plenty of experience writing tests and would normally do so. I intentionally chose to omit them in this case to leave more time for feature development.
  
